@@ -1,23 +1,29 @@
-name: Teste de API
 
-on: [push]
+name: CI - Testes da API
+
+on:
+  push:
+    branches: [main, featuremultiplicacao]
+  pull_request:
+    branches: [main]
 
 jobs:
   verificar-api:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Setup Python
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'
 
       - name: Instalar dependências
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install -r requirements.txt
 
       - name: Rodar Testes
-        run: pytest test_main.py
+        run: python -m pytest -v
