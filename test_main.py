@@ -6,7 +6,7 @@ client = TestClient(app)
 def test_read_root():
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {"mensagem": "API funcionando!"}
+    assert response.json() == {"mensagem": "API funcionando111!"}
 
 def test_somar():
     response = client.get("/somar/5/3")
